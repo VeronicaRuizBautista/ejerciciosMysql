@@ -31,18 +31,23 @@ import {
     getTotalPayments,
     getTotalPaymentsForEachCustumer,
     getTotalPaymentsForEachCountry,
-    getTotalPaymentsForEachSeller
+    getTotalPaymentsForEachSeller,
+    getTotalPaymentsForEachYear
 } from "./module/payments.js";
 import { 
     getAllCustomersByCountryANdCreditLimit,
     getAverageCreditLimitOfAllCustomers,
-    getAverageCreditLimitOfCustomersByCountry
+    getAverageCreditLimitOfCustomersByCountry,
+    getAverageCreditLimitOfCustomerForEachSeller
  } from "./module/customers.js";
 import { getAllProductsWithDescription } from "./module/product.js";
-import { getAllQuantityOfficesForEachCountry } from "./module/offices.js";
 import { 
+    getAllQuantityOfficesForEachCountry,
+    getTotalSalesForEachOffice
+} from "./module/offices.js";import { 
     getAverageQuantityProductsInStockByProductsLine,
-    getAverageBuyPriceProductosByProductsLine
+    getAverageBuyPriceProductosByProductsLine,
+    getAverageBuyPriceProductosForEachCustomer
 } from "./module/productLines.js";
 
 
