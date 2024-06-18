@@ -17,3 +17,21 @@ export const getTotalPayments = async()=>{
     let [result] = await connection.execute(`SELECT SUM(amount) AS totalPayments FROM payments;`);
     return result;
 }
+
+//Calcular el total de pagos recibidos por cada cliente
+export const getTotalPaymentsForEachCustumer = async()=>{
+    let [result] = await connection.execute(`SELECT customers.customerName, SUM(payments.amount) AS totalPayments FROM customers JOIN payments ON payments.customerNumber = customers.customerNumber GROUP BY customers.customerNumber;`);
+    return result;
+}
+
+//Calcular el total de pagos recibidos por cada país
+export const getTotalPaymentsForEachCountry = async()=>{
+    let [result] = await connection.execute(`SELECT customers.country, COUNT(*) AS totalPayments FROM payments JOIN customers  ON customers.customerNumber = payments.customerNumber GROUP BY customers.country;`);
+    return result;
+}
+
+//Calcular el total de pagos recibidos por cada vendedor
+export const getTotalPaymentsForEachSeller = async()=>{
+    let [result] = await connection.execute(`SELECT employees.employeeNumber, employees.firstName, COUNT(*) AS totalPayments FROM payments JOIN customers ON customers.customerNumber = payments.customerNumber JOIN employees ON employees.employeeNumber = customers.salesRepEmployeeNumber GROUP BY employees.employeeNumber, employees.firstName;`);
+    return result;
+}

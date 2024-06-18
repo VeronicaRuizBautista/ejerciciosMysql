@@ -41,3 +41,28 @@ export const getAverageSuggestedPriceOfProducts= async()=>{
     let [result] = await connection.query(`SELECT AVG(products.MSRP) AS averagePriceMSRP FROM products;`);
     return result;
 }
+
+
+//Encontrar la cantidad total de productos pedidos por cada cliente
+export const getTotalOrderedProductsForEachCustomer= async()=>{
+    let [result] = await connection.query(`SELECT customers.customerName, COUNT(*) AS totalProducts FROM orderdetails JOIN orders ON orders.orderNumber  = orderdetails.orderNumber JOIN customers ON customers.customerNumber = orders.customerNumber GROUP BY customers.customerName;`);
+    return result;
+}
+
+//Obtener la cantidad total de productos vendidos por cada línea de productos
+export const getTotalQuantityProductsSalesForEachProductLine= async()=>{
+    let [result] = await connection.query(`SELECT products.productLine,  SUM(orderdetails.quantityOrdered) AS quantityProductsSold FROM products JOIN orderdetails ON orderdetails.productCode = products.productCode GROUP BY products.productLine;`);
+    return result;
+}
+
+//Encontrar el promedio de la cantidad de productos ordenados por cada cliente
+export const getAverageQuantityProductsForEachCustomer= async()=>{
+    let [result] = await connection.query(`SELECT customers.customerName, AVG(orderdetails.quantityOrdered) AS averageQuantityProducts FROM orderdetails JOIN orders ON orders.orderNumber = orderdetails.orderNumber JOIN customers ON customers.customerNumber = orders.customerNumber GROUP BY customers.customerName;`);
+    return result;
+}
+
+//Encontrar la cantidad total de productos vendidos por cada vendedor
+export const getTotalQuantityProductsSalesForEahSeller= async()=>{
+    let [result] = await connection.query(`SELECT  employees.employeeNumber, employees.firstName, SUM(orderdetails.quantityOrdered) AS totalQuantitySold FROM  employees JOIN  customers ON employees.employeeNumber = customers.salesRepEmployeeNumber JOIN  orders ON customers.customerNumber = orders.customerNumber JOIN  orderdetails ON orders.orderNumber = orderdetails.orderNumber GROUP BY  employees.employeeNumber, employees.firstName;`);
+    return result;
+}

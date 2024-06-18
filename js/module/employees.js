@@ -23,3 +23,16 @@ export const getQuantityEmployeesByJobTitle = async()=>{
     let [result] = await connection.query(`SELECT jobTitle, COUNT(*) AS quantityEmployees FROM employees GROUP BY JobTitle;`);
     return result;
 }
+
+
+//Encontrar el promedio de ventas (cantidad ordenada por precio cada uno) por cada empleado
+export const getAverageSalesForEachEmployee = async()=>{
+    let [result] = await connection.query(`SELECT employees.firstName,   AVG(orderdetails.quantityordered * orderdetails.priceEach) AS averageSales FROM orderdetails JOIN orders ON orders.orderNumber = orderdetails.orderNumber JOIN customers ON customers.customerNumber = orders.customerNumber JOIN employees ON employees.employeeNumber = customers.salesRepEmployeeNumber GROUP BY employees.firstName;`);
+    return result;
+}
+
+//Calcular el total de órdenes gestionadas por cada empleado
+export const getTotalManagedOrdersForEachEmployee = async()=>{
+    let [result] = await connection.query(`SELECT employees.firstName,   COUNT(*) AS totalOrders FROM orderdetails JOIN orders ON orders.orderNumber = orderdetails.orderNumber JOIN customers ON customers.customerNumber = orders.customerNumber JOIN employees ON employees.employeeNumber = customers.salesRepEmployeeNumber GROUP BY employees.firstName;`);
+    return result;
+}
