@@ -1,15 +1,33 @@
-import { getAllProductsDescription } from "./module/product.js";
+import { 
+    getAllProductsDescription,
+    getTotalProductsInStock,
+    getAverageBuyPriceOfAllProducts,
+    getAverageQuantityProductsOrederedByOrders,
+    getTotalPriceOfAllProducts,
+    getAverageSuggestedPriceOfProducts
+} from "./module/product.js";
 import { 
     getAllEmployeesWithOfficeInSanFrancisco,
-    getAllEmployeesByreportTo
+    getAllEmployeesByreportTo,
+    getTotalQuantityEmployees,
+    getQuantityEmployeesByJobTitle
 } from "./module/employees.js";
 import { 
     getAllOrdersWithStatusSHipped,
-    getAllOrdersByCustomersCountry
+    getAllOrdersByCustomersCountry,
+    getAllDetailsOrdersByCustomerNumber
 } from "./module/orders.js";
-import { getAllPaymentsdetailByCustomer } from "./module/payments.js";
-import { getAllCustomersByCountryANdCreditLimit } from "./module/customers.js";
+import { 
+    getAllPaymentsdetailByCustomer, 
+    getTotalPaymentForEachCustomer,
+    getTotalPayments
+} from "./module/payments.js";
+import { 
+    getAllCustomersByCountryANdCreditLimit,
+    getAverageCreditLimitOfAllCustomers
+ } from "./module/customers.js";
 import { getAllProductsWithDescription } from "./module/product.js";
+import { getAllQuantityOfficesForEachCountry } from "./module/offices.js";
 
 
 console.log( await getAllOrdersByCustomersCountry())

@@ -11,3 +11,15 @@ export const getAllEmployeesByreportTo = async(id = 1143)=>{
     let [result] = await connection.query(` SELECT firstName, email FROM employees WHERE reportsTo = ?`, [id]);
     return result;
 }
+
+//Obtener la cantidad total de empleados
+export const getTotalQuantityEmployees = async()=>{
+    let [result] = await connection.query(`SELECT COUNT(*) AS totalEmployees FROM employees;`);
+    return result;
+}
+
+//Contar la cantidad de empleados por título de trabajo
+export const getQuantityEmployeesByJobTitle = async()=>{
+    let [result] = await connection.query(`SELECT jobTitle, COUNT(*) AS quantityEmployees FROM employees GROUP BY JobTitle;`);
+    return result;
+}

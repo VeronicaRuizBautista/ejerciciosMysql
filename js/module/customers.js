@@ -5,3 +5,10 @@ export const getAllCustomersByCountryANdCreditLimit = async(country = 'USA', cre
     let [result] = await connection.query(`SELECT * FROM customers WHERE country = ? AND creditLimit > ?`,[country, creditLimit]);
     return result;
 }
+
+
+//Obtener el promedio del límite de crédito de todos los clientes
+export const getAverageCreditLimitOfAllCustomers = async()=>{
+    let [result] = await connection.query(`SELECT AVG(creditLimit) AS averageCreditLimit FROM customers;`);
+    return result;
+}
